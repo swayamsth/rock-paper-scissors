@@ -11,7 +11,6 @@ function getComputerChoice(){
 // Plays a single round of the game
 
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase()
     let result, playerCount = 0, computerCount = 0;
     if (playerSelection !== computerSelection){
         switch (playerSelection + " " + computerSelection){
@@ -42,7 +41,7 @@ function playRound(playerSelection, computerSelection){
         }
     } else {
         console.log("You tied.");
-        playerSelection = prompt("Rock, Paper or Scissors?");
+        playerSelection = getPlayerChoice();
         computerSelection = getComputerChoice();
         return playRound(playerSelection,computerSelection);
     }
@@ -50,10 +49,12 @@ function playRound(playerSelection, computerSelection){
     return [result, playerCount, computerCount];
 }
 
+// Main game
+
 function game(){
     let playerCount = 0, computerCount = 0;
     for (let i = 0; i < 5; i++){
-        const playerSelection = prompt("Rock, Paper or Scissors?");
+        const playerSelection = getPlayerChoice();
         const computerSelection = getComputerChoice();
         list = playRound(playerSelection,computerSelection);
         
@@ -69,6 +70,18 @@ function game(){
         console.log(`Player 1 won the game with ${playerCount} points!`)
     }else {
         console.log(`Computer won the game with ${computerCount} points!`)
+    }
+}
+
+// Player Selection
+
+function getPlayerChoice(){
+    const choices = ["rock", "paper", "scissors"];
+    const choice = prompt("Rock, Paper or Scissors?").toLowerCase();
+    if (choices.includes(choice)){
+        return choice;
+    }else{
+        return getPlayerChoice();
     }
 }
 
