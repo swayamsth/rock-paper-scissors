@@ -49,30 +49,6 @@ function playRound(playerSelection, computerSelection){
     return [result, playerCount, computerCount];
 }
 
-// Main game
-
-function game(){
-    let playerCount = 0, computerCount = 0;
-    for (let i = 0; i < 5; i++){
-        const playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-        list = playRound(playerSelection,computerSelection);
-        
-        if (list[1]>list[2]){
-            playerCount++;
-        }else{
-            computerCount++;
-        }
-        console.log(list[0]);
-    }
-    
-    if (playerCount > computerCount){
-        console.log(`Player 1 won the game with ${playerCount} points!`)
-    }else {
-        console.log(`Computer won the game with ${computerCount} points!`)
-    }
-}
-
 // Player Selection
 
 function getPlayerChoice(){
@@ -85,4 +61,15 @@ function getPlayerChoice(){
     }
 }
 
-game();
+
+const choices = document.querySelectorAll("#btn button");
+
+choices.forEach(item => item.addEventListener('click', () => {
+    const playerChoice = item.id;
+    console.log(playerChoice);
+    const computerChoice = getComputerChoice();
+    console.log(computerChoice);
+    list = playRound(playerChoice, computerChoice);
+    console.log(list[0]);
+
+}))
