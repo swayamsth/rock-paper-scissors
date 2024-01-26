@@ -82,7 +82,9 @@ function main(){
                 restartBtn.textContent = "Restart";
                 restartDiv.appendChild(restartBtn);
 
-
+                restartBtn.onclick = function() {
+                    location.reload();
+                }
             }
         })
     });
