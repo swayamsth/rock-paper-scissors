@@ -46,13 +46,14 @@ function playRound(playerSelection, computerSelection){
     return [result, playerCount, computerCount];
 }
 
-// Player Selection
+// Main Game
 
 function main(){
     const choices = document.querySelectorAll("#btn button");
+    const div = document.querySelector("#btn");
     const output = document.querySelector("#output");
+    const playercomputer = document.querySelector("#playercomputer");
     let playerCount = 0, computerCount = 0;
-    let choice = "";
     choices.forEach(item => {
         item.addEventListener('click', (e) => {
             playerSelection = e.target.value;
@@ -65,13 +66,24 @@ function main(){
                 computerCount++;
             }
 
-            console.log(`player: ${playerCount}`);
-            console.log(`computer: ${computerCount}`);
+            output.textContent = result[0];
+            playercomputer.textContent = `Player: ${playerCount} Computer: ${computerCount}`;
 
-            const res = document.createElement("p");
-            res.textContent = result[0];
-            output.appendChild(res);
+            if (playerCount === 5 || computerCount === 5){    
+                div.remove();
+                if (playerCount > computerCount){
+                    output.textContent = `You Win ${playerCount} - ${computerCount}`;
+                } else {
+                    output.textContent = `You Lose ${computerCount} - ${playerCount}`;
+                }
 
+                const restartBtn = document.createElement("button");
+                const restartDiv = document.querySelector("#restart");
+                restartBtn.textContent = "Restart";
+                restartDiv.appendChild(restartBtn);
+
+
+            }
         })
     });
 }
